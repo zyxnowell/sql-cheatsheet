@@ -145,6 +145,7 @@ WHERE column LIKE 'a%o' --Finds any values that start with "a" and ends with "o"
 ```	
 
 ### STUFF 
+###### The STUFF() function deletes a part of a string and then inserts another part into the string, starting at a specified position
 ```sql
 -- Syntax
 STUFF (character_expression, start, length, new_string )
@@ -156,8 +157,8 @@ FROM Products
 ```
 
 ### COALESCE
+###### Returns the first non-null value in a list:
 ```sql
---Returns the first non-null value in a list:
 SELECT COALESCE(NULL, NULL, NULL, 'JigJun', NULL, 1);
 -- OUTPUT: 'JigJun'
 ```

@@ -82,34 +82,28 @@ WHERE column LIKE pattern;
 
 ###### pattern operator
 ```sql
-WHERE column LIKE 'a%'	
+WHERE column LIKE 'a%'	--Finds any values that start with "a"
 ```
-> Finds any values that start with "a"
 
 ```sql 
-WHERE column LIKE '%a'
+WHERE column LIKE '%a' --Finds any values that end with "a"
 ```	
-> Finds any values that end with "a"
 
 ```sql 
-WHERE column LIKE '%or%'
+WHERE column LIKE '%or%' --Finds any values that have "or" in any position
 ```	
-> Finds any values that have "or" in any position
 
 ```sql 
-WHERE column LIKE '_r%'
+WHERE column LIKE '_r%' --Finds any values that have "r" in the second position
 ```	
-> Finds any values that have "r" in the second position
 
 ```sql 
-WHERE column LIKE 'a_%_%'
+WHERE column LIKE 'a_%_%' --Finds any values that start with "a" and are at least 3 characters in length
 ```	
-> Finds any values that start with "a" and are at least 3 characters in length
 
 ```sql 
-WHERE column LIKE 'a%o'
+WHERE column LIKE 'a%o' --Finds any values that start with "a" and ends with "o"
 ```	
-> Finds any values that start with "a" and ends with "o"
 
 
 ### JOINS

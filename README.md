@@ -20,12 +20,12 @@ WHERE NOT condition
 ```
 
 ### INSERT INTO Table
-######Specify columns
+###### Specify columns
 ```sql
 INSERT INTO table_name (column, column)
 VALUES (value, value)
 ```
-######Insert to all columns
+###### Insert to all columns
 ```sql
 INSERT INTO table_name
 VALUES (value, value)
@@ -51,14 +51,14 @@ TRUNCATE TABLE table_name;
 ```
 
 ### Basic Functions
-######SELECT TOP
+###### SELECT TOP
 ```sql
 SELECT TOP number|percent column_name
 FROM table_name
 WHERE condition;
 ```
 
-######MIN/MAX
+###### MIN/MAX
 *Returns the smallest/biggest value in selected column*
 ```sql
 SELECT MIN|MAX(column_name)
@@ -66,7 +66,7 @@ FROM table_name
 WHERE condition;
 ```
 
-######COUNT/AVG/SUM
+###### COUNT/AVG/SUM
 ```sql
 SELECT COUNT|AVG|SUM(column_name)
 FROM table_name

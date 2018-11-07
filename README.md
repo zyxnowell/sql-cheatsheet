@@ -1,10 +1,23 @@
 # sql-cheatsheet
 Personal cheat sheet for querying relational database
 
-## The basics
+# Legend
+```
+*Italic*: Tables/Columns/Condition
+~~Strikethrough~~: Optional
+```
+
+## The Basics
 
 ###### SELECT Statement
 ```
-Select column FROM table_name 
-WHERE condition
+SELECT ~~DISTINCT~~ *column* FROM *table_name* 
+WHERE *condition*
+```
+
+###### WHERE Conditions
+```
+ - WHERE condition1 AND condition2
+ - WHERE condition1 OR condition2
+ - WHERE NOT condition
 ```

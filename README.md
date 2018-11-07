@@ -1,5 +1,5 @@
 # sql-cheatsheet
-Personal cheat sheet for querying relational database
+Personal cheat sheet for querying relational database in SQL SERVER
 
 ## The Basics
 
@@ -118,4 +118,57 @@ SELECT column_name(s)
 FROM table A
 JOIN table B 
     ON A.column_name = B.column_name;
+```
+
+
+### SQL Statements
+
+###### CREATE Table
+```sql
+CREATE TABLE table_name (
+    column int IDENTITY(1,1) PRIMARY KEY, -- primary key and "IDENTITY(1,1)" for auto increment
+    column data_type NOT NULL,            -- normal column
+	ListingTypeID int NOT NULL FOREIGN KEY REFERENCES table_name(column) -- foreign key
+);
+```
+
+###### ALTER Table
+
+```sql
+-- ADD Column
+ALTER TABLE table_name
+ADD column_name datatype;
+```
+
+```sql
+-- DROP COLUMN
+ALTER TABLE table_name
+DROP column_name datatype;
+```
+
+```sql
+-- ALTER COLUMN
+ALTER TABLE table_name
+ALTER column_name datatype;
+```
+
+
+###### CHECK Constraint
+```sql
+-- The CHECK constraint is used to limit the value range that can be placed in a column
+CREATE TABLE table_name (
+    ID int NOT NULL,
+    [Percentage] DECIMAL(5,4),
+    CHECK ([Percentage] <= 1.0000)
+);
+``` 
+
+###### DEFAULT Constraint
+```sql
+-- DEFAULT constraint is used to provide a default value for a column
+CREATE TABLE table_name (
+    ID int NOT NULL,
+    VARCHAR_column varchar(255) DEFAULT 'Text',
+    INT_column INT DEFAULT 1
+);
 ```

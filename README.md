@@ -156,6 +156,15 @@ FROM Products
 -- OUTPUT: 20 becomes 2000
 ```
 
+### REPLACE 
+```sql
+-- Syntax
+REPLACE(string, old_string, new_string)
+
+-- Replaces 'A' with 'C'
+SELECT REPLACE('AB AB', 'A','C')
+```
+
 ### COALESCE
 ###### Returns the first non-null value in a list:
 ```sql

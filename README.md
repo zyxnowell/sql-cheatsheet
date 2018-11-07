@@ -73,7 +73,7 @@ FROM table_name
 WHERE condition;
 ```
 
-###### LIKE Syntax
+### LIKE Syntax
 ```
 SELECT column
 FROM table_name

@@ -5,18 +5,57 @@ Personal cheat sheet for querying relational database in SQL SERVER
 
 ### Basic SELECT Statement
 ```sql
-SELECT DISTINCT column FROM table_name 
-WHERE condition
-ORDER BY column ASC|DESC
+SELECT select_list 
+[ FROM table_source ]
+[ WHERE search_condition ] 
+[ GROUP BY group_by_expression ] 
+[ HAVING search_condition ] 
+[ ORDER BY order_expression [ ASC | DESC ] ] 
 ```
 
 ### WHERE Conditions
 ```sql
+-- AND 
+SELECT column_name FROM table_name
 WHERE condition1 AND condition2
+```
 
+```sql
+-- OR
+SELECT column_name FROM table_name
 WHERE condition1 OR condition2
+```
 
+```sql
+-- EXISTS
+SELECT column_name FROM table_name
+WHERE EXISTS (SELECT column_name FROM table_name)
+```
+
+```sql
+-- ANY
+SELECT column_name FROM table_name
+WHERE column = ANY (SELECT column_name FROM table_name)
+```
+
+```sql
+-- ALL
+SELECT column_name FROM table_name
+WHERE column = ALL (SELECT column_name FROM table_name)
+```
+
+```sql
+-- WHERE NOT
+SELECT column_name FROM table_name
 WHERE NOT condition
+```
+
+### CASE Statement
+```sql
+CASE
+    WHEN condition THEN 'true' 
+    ELSE 'false'
+END
 ```
 
 ### INSERT INTO Table
@@ -53,7 +92,7 @@ TRUNCATE TABLE table_name;
 ### Basic Functions
 ###### SELECT TOP
 ```sql
-SELECT TOP number|percent column_name
+SELECT TOP [ number | percent ] column_name
 FROM table_name
 WHERE condition;
 ```
@@ -61,14 +100,14 @@ WHERE condition;
 ###### MIN/MAX
 *Returns the smallest/biggest value in selected column*
 ```sql
-SELECT MIN|MAX(column_name)
+SELECT [ MIN | MAX ] (column_name)
 FROM table_name
 WHERE condition;
 ```
 
 ###### COUNT/AVG/SUM
 ```sql
-SELECT COUNT|AVG|SUM(column_name)
+SELECT [ COUNT | AVG | SUM] (column_name)
 FROM table_name
 WHERE condition;
 ```
@@ -104,6 +143,24 @@ WHERE column LIKE 'a_%_%' --Finds any values that start with "a" and are at leas
 ```sql 
 WHERE column LIKE 'a%o' --Finds any values that start with "a" and ends with "o"
 ```	
+
+### STUFF 
+```sql
+-- Syntax
+STUFF (character_expression, start, length, new_string )
+
+-- Example: deletes the second digit of the product ID in the Productstable and replaces it with the characters '000'
+SELECT STUFF([Product_ID], 2,1, '000')
+FROM Products
+-- OUTPUT: 20 becomes 2000
+```
+
+### COALESCE
+```sql
+--Returns the first non-null value in a list:
+SELECT COALESCE(NULL, NULL, NULL, 'JigJun', NULL, 1);
+-- OUTPUT: 'JigJun'
+```
 
 
 ### JOINS
@@ -171,4 +228,82 @@ CREATE TABLE table_name (
     VARCHAR_column varchar(255) DEFAULT 'Text',
     INT_column INT DEFAULT 1
 );
+```
+
+###### IF ELSE Statement
+```sql
+IF (@variable = 1)
+BEGIN
+    --insert code here
+END
+ELSE
+BEGIN
+    --insert code here
+END
+```
+
+### Declare Temporary Table
+```sql
+DECLARE @Temp TABLE
+    (
+        column INT,
+        column2 VARCHAR(10)
+    );
+```
+
+### Stored Procedure Template
+```sql
+SET QUOTED_IDENTIFIER ON
+SET ANSI_NULLS ON
+GO
+
+/******************************************************************************   
+** Change History  
+**  
+** CID    Date				Author			Description   
+** -----  ---------- ---------- -----------------------------------------------  
+** CH001  06/11/2018		N.Sun		    Initial Version 
+*******************************************************************************/
+-- exec [SP_Template] 1
+CREATE PROCEDURE [dbo].[SP_Template]
+	@Parameter INT
+AS
+BEGIN
+    DECLARE @Result TABLE
+    (
+        column INT,
+        column2 VARCHAR(10)
+    );
+
+	INSERT INTO @Result
+	(
+	    column,
+		column2,
+	)
+	SELECT column,
+		   @column2
+	FROM dbo.table_name A 
+	INNER JOIN dbo.table_name B 
+        ON A.column = B.column
+	WHERE A.column = @Parameter
+  
+	SELECT 
+			column,
+			column2
+	FROM @Result;
+END;
+
+GO
+```
+
+
+### OFFSET FETCH Clause
+```sql
+-- Skip first 10 rows from the sorted result set and return the remaining rows.
+SELECT column1, column2 FROM table_name ORDER BY column1 OFFSET 10 ROWS;
+```
+
+```sql
+-- Skip first 10 rows from the sorted resultset and return next 5 rows.
+SELECT column1, column2 FROM table_name ORDER BY column1 OFFSET 10 ROWS FETCH NEXT 5 ROWS ONLY;
 ```

@@ -3,14 +3,14 @@ Personal cheat sheet for querying relational database
 
 ## The Basics
 
-###### Basic SELECT Statement
+### Basic SELECT Statement
 ```
 SELECT DISTINCT column FROM table_name 
 WHERE condition
 ORDER BY column ASC|DESC
 ```
 
-###### WHERE Conditions
+### WHERE Conditions
 ```
 WHERE condition1 AND condition2
 
@@ -19,19 +19,19 @@ WHERE condition1 OR condition2
 WHERE NOT condition
 ```
 
-###### INSERT INTO Table
-**Specify columns**
+### INSERT INTO Table
+######Specify columns
 ```
 INSERT INTO table_name (column, column)
 VALUES (value, value)
 ```
-**Insert to all columns**
+######Insert to all columns
 ```
 INSERT INTO table_name
 VALUES (value, value)
 ```
 
-###### UPDATE Table
+### UPDATE Table
 ```
 UPDATE table_name
     SET column = value,
@@ -40,25 +40,25 @@ UPDATE table_name
 WHERE condition;
 ```
 
-###### DELETE Table
+### DELETE Table
 ```
 DELETE FROM table_name WHERE condition;
 ```
 
-###### TRUNCATE Table
+### TRUNCATE Table
 ```
 TRUNCATE TABLE table_name;
 ```
 
-###### Basic Functions
-**SELECT TOP**
+### Basic Functions
+######SELECT TOP
 ```
 SELECT TOP number|percent column_name
 FROM table_name
 WHERE condition;
 ```
 
-**MIN/MAX**
+######MIN/MAX
 *Returns the smallest/biggest value in selected column*
 ```
 SELECT MIN|MAX(column_name)
@@ -66,7 +66,7 @@ FROM table_name
 WHERE condition;
 ```
 
-**COUNT/AVG/SUM**
+######COUNT/AVG/SUM
 ```
 SELECT COUNT|AVG|SUM(column_name)
 FROM table_name
@@ -80,7 +80,7 @@ FROM table_name
 WHERE column LIKE pattern;
 ```
 
-**pattern operator**
+###### pattern operator
 ```
 WHERE column LIKE 'a%'	
 ```

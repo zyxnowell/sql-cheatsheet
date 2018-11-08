@@ -195,7 +195,7 @@ JOIN table B
 CREATE TABLE table_name (
     column int IDENTITY(1,1) PRIMARY KEY, -- primary key and "IDENTITY(1,1)" for auto increment
     column data_type NOT NULL,            -- normal column
-	ListingTypeID int NOT NULL FOREIGN KEY REFERENCES table_name(column) -- foreign key
+    column data_type NOT NULL FOREIGN KEY REFERENCES table_name(column) -- foreign key
 );
 ```
 

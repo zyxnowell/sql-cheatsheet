@@ -317,3 +317,14 @@ SELECT column1, column2 FROM table_name ORDER BY column1 OFFSET 10 ROWS;
 -- Skip first 10 rows from the sorted resultset and return next 5 rows.
 SELECT column1, column2 FROM table_name ORDER BY column1 OFFSET 10 ROWS FETCH NEXT 5 ROWS ONLY;
 ```
+
+
+### Renaming a Table
+```sql
+exec sp_rename '[schema.old_table_name]', 'new_table_name'
+```
+
+### Renaming a Column
+```sql
+exec sp_rename 'table_name.[oldColumName]' , '[newColumName]', 'COLUMN'
+```

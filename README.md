@@ -298,10 +298,41 @@ BEGIN
 	WHERE A.column = @Parameter
   
 	SELECT 
-			column,
-			column2
+        column,
+        column2
 	FROM @Result;
 END;
+
+GO
+```
+
+### Finding text in SP
+```sql
+SET QUOTED_IDENTIFIER ON
+SET ANSI_NULLS ON
+GO
+
+CREATE PROCEDURE [dbo].[Find_Text_In_SP]
+	@StringToSearch VARCHAR(100),
+	@StringToSearch2 VARCHAR(100) = '',
+	@StringToSearch3 VARCHAR(100) = '',
+	@Name VARCHAR(100) = ''
+
+AS
+
+	SET @StringToSearch = '%' +@StringToSearch + '%'
+	SET @StringToSearch2 = '%' +@StringToSearch2 + '%'
+	SET @StringToSearch3 = '%' +@StringToSearch3 + '%'
+	SET @Name = '%' +@Name + '%'
+
+	SELECT ROUTINE_NAME, LEN(OBJECT_DEFINITION(OBJECT_ID(ROUTINE_NAME))) AS SP_Length
+		FROM INFORMATION_SCHEMA.ROUTINES
+	WHERE OBJECT_DEFINITION(OBJECT_ID(ROUTINE_NAME)) LIKE @stringtosearch
+		AND OBJECT_DEFINITION(OBJECT_ID(ROUTINE_NAME)) LIKE @StringToSearch2
+		AND OBJECT_DEFINITION(OBJECT_ID(ROUTINE_NAME)) LIKE @StringToSearch3
+		AND (ROUTINE_TYPE='PROCEDURE' OR ROUTINE_TYPE='FUNCTION')
+		AND ROUTINE_NAME LIKE @Name
+	ORDER BY routine_name
 
 GO
 ```
@@ -326,5 +357,5 @@ exec sp_rename '[schema.old_table_name]', 'new_table_name'
 
 ### Renaming a Column
 ```sql
-exec sp_rename 'table_name.[oldColumName]' , '[newColumName]', 'COLUMN'
+exec sp_rename 'table_name.[oldColumName]' , 'newColumName', 'COLUMN'
 ```

@@ -359,3 +359,13 @@ exec sp_rename '[schema.old_table_name]', 'new_table_name'
 ```sql
 exec sp_rename 'table_name.[oldColumName]' , 'newColumName', 'COLUMN'
 ```
+
+### SCOPE_IDENTITY 
+```sql
+-- returns the last IDENTITY value inserted into an IDENTITY column in the same scope
+-- returns the last identity value generated for any table in the current session and the current scope
+-- A scope is a module; a Stored Procedure, trigger, function, or batch
+
+SELECT SCOPE_IDENTITY()
+
+```

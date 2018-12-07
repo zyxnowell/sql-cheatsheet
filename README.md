@@ -261,7 +261,7 @@ DECLARE @Temp TABLE
     );
 ```
 
-### Stored Procedure Template
+### Stored Procedure Template (GET)
 ```sql
 SET QUOTED_IDENTIFIER ON
 SET ANSI_NULLS ON
@@ -274,8 +274,8 @@ GO
 ** -----  ---------- ---------- -----------------------------------------------  
 ** CH001  06/11/2018		N.Sun		    Initial Version 
 *******************************************************************************/
--- exec [SP_Template] 1
-CREATE PROCEDURE [dbo].[SP_Template]
+-- exec [SP_Template_Get] 1
+CREATE PROCEDURE [dbo].[SP_Template_Get]
 	@Parameter INT
 AS
 BEGIN
@@ -301,6 +301,49 @@ BEGIN
         column,
         column2
 	FROM @Result;
+END;
+
+GO
+```
+
+### Stored Procedure Template (SET)
+```sql
+SET QUOTED_IDENTIFIER ON
+SET ANSI_NULLS ON
+GO
+
+/******************************************************************************   
+** Change History  
+**  
+** CID    Date				Author			Description   
+** -----  ---------- ---------- -----------------------------------------------  
+** CH001  06/11/2018		N.Sun		    Initial Version 
+*******************************************************************************/
+-- exec [SP_Template_Set] 1
+CREATE PROCEDURE [dbo].[SP_Template_Set]
+	@Parameter INT
+AS
+BEGIN
+	INSERT INTO dbo.table
+	(
+	    column,
+		column2,
+	) 
+    VALUES
+    (
+        value1,
+        value2
+    )
+
+    IF (@@ROWCOUNT = 0)
+    BEGIN
+        SELECT 1 As Success 
+    END
+    ELSE
+    BEGIN
+        SELECT 0 As Success 
+    END
+	
 END;
 
 GO

@@ -335,13 +335,13 @@ BEGIN
         value2
     )
 
-    IF (@@ROWCOUNT = 0)
+    IF (@@ERROR <> 0 OR @@ROWCOUNT = 0)
     BEGIN
-        SELECT 1 As Success 
+        SELECT 0 As Success 
     END
     ELSE
     BEGIN
-        SELECT 0 As Success 
+        SELECT 1 As Success 
     END
 	
 END;

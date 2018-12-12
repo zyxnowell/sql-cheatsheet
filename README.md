@@ -204,7 +204,7 @@ CREATE TABLE table_name (
 ```sql
 -- ADD Column
 ALTER TABLE table_name
-ADD COLUMN column_name datatype;
+ADD column_name datatype;
 ```
 
 ```sql

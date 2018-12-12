@@ -204,19 +204,19 @@ CREATE TABLE table_name (
 ```sql
 -- ADD Column
 ALTER TABLE table_name
-ADD column_name datatype;
+ADD COLUMN column_name datatype;
 ```
 
 ```sql
 -- DROP COLUMN
 ALTER TABLE table_name
-DROP column_name datatype;
+DROP COLUMN column_name datatype;
 ```
 
 ```sql
 -- ALTER COLUMN
 ALTER TABLE table_name
-ALTER column_name datatype;
+ALTER COLUMN column_name datatype;
 ```
 
 

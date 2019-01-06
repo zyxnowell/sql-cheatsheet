@@ -349,6 +349,30 @@ END;
 GO
 ```
 
+### Common Table Expression (CTE) 
+```sql
+-- Specifies a temporary named result set, known as a common table expression (CTE). 
+-- This is derived from a simple query and defined within the execution scope of a single SELECT, INSERT, UPDATE, or DELETE statement.
+
+
+-- Defining the column list is optional
+WITH CTE_Name (column1, column2)  
+AS  
+-- Define the CTE query.  
+(  
+    SELECT column1, column2  
+    FROM Table1 
+    WHERE column1 IS NOT NULL
+)  
+-- Define the outer query referencing the CTE name.  
+SELECT *
+FROM CTE_Name  
+GROUP BY column1, column2  
+ORDER BY column1, column2;  
+GO  
+
+```
+
 ### Finding text in SP
 ```sql
 SET QUOTED_IDENTIFIER ON

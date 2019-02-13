@@ -437,17 +437,6 @@ SELECT SCOPE_IDENTITY()
 
 ```
 
-
-### SCOPE_IDENTITY 
-```sql
--- returns the last IDENTITY value inserted into an IDENTITY column in the same scope
--- returns the last identity value generated for any table in the current session and the current scope
--- A scope is a module; a Stored Procedure, trigger, function, or batch
-
-SELECT SCOPE_IDENTITY()
-
-```
-
 ### FIND WHICH TABLE A CONSTRAINT BELONGS TO
 ```sql
 SELECT

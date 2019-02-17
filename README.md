@@ -1,8 +1,6 @@
 # sql-cheatsheet
 Personal cheat sheet for querying relational database in SQL SERVER
 
-## The Basics
-
 ### Basic SELECT Statement
 ```sql
 SELECT select_list 

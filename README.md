@@ -322,26 +322,19 @@ CREATE PROCEDURE [dbo].[SP_Template_Set]
 	@Parameter INT
 AS
 BEGIN
-	INSERT INTO dbo.table
-	(
-	    column,
-		column2,
-	) 
-    VALUES
-    (
-        value1,
-        value2
-    )
+     BEGIN TRY
+        BEGIN TRANSACTION        
+        
+        -- Do something here
 
-    IF (@@ERROR <> 0 OR @@ROWCOUNT = 0)
-    BEGIN
-        SELECT 0 As Success 
-    END
-    ELSE
-    BEGIN
+        COMMIT TRANSACTION
         SELECT 1 As Success 
-    END
-	
+    END TRY
+    BEGIN CATCH
+
+        ROLLBACK TRANSACTION
+        SELECT 0 As Success 
+    END CATCH
 END;
 
 GO

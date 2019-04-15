@@ -270,7 +270,7 @@ GO
 **  
 ** CID    Date				Author			Description   
 ** -----  ---------- ---------- -----------------------------------------------  
-** CH001  03/03/2019		N.Sun		    Initial Version 
+** CH001  15/04/2019		N.Sun		    Initial Version 
 *******************************************************************************/
 -- exec [SP_Template_Get] 1
 CREATE PROCEDURE [dbo].[SP_Template_Get]
@@ -315,7 +315,7 @@ GO
 **  
 ** CID    Date				Author			Description   
 ** -----  ---------- ---------- -----------------------------------------------  
-** CH001  03/03/2019		N.Sun		    Initial Version 
+** CH001  15/04/2019		N.Sun		    Initial Version 
 *******************************************************************************/
 -- exec [SP_Template_Set] 1
 CREATE PROCEDURE [dbo].[SP_Template_Set]

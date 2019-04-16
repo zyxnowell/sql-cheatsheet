@@ -437,3 +437,34 @@ FROM
 WHERE
    o.name = 'MyConstraintName' AND o.parent_object_id <> 0
 ``` 
+
+### TRY-CATCH STATEMENT
+```sql
+BEGIN TRY
+    BEGIN TRANSACTION        
+    
+    -- Do something here
+
+    COMMIT TRANSACTION
+    SELECT 1 As Success 
+END TRY
+BEGIN CATCH
+    DECLARE 
+        @ErrorMessage NVARCHAR(4000),
+        @ErrorSeverity INT,
+        @ErrorState INT;
+    SELECT 
+        @ErrorMessage = ERROR_MESSAGE(),
+        @ErrorSeverity = ERROR_SEVERITY(),
+        @ErrorState = ERROR_STATE();
+    RAISERROR (
+        @ErrorMessage,
+        @ErrorSeverity,
+        @ErrorState    
+        );
+        
+    ROLLBACK TRANSACTION
+    SELECT 0 As Success 
+END CATCH
+
+```

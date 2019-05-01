@@ -468,3 +468,13 @@ BEGIN CATCH
 END CATCH
 
 ```
+
+### OPTIONAL CONDITION VARIABLES IN WHERE CLAUSE
+```sql
+-- using '=' operator
+WHERE Column = IIF(@Variable IS NULL ,@Variable, Column)
+
+-- using 'LIKE, IN, etc.'
+WHERE (@Variable IS NULL OR Column LIKE '%' + @Variable + '%' )
+
+```

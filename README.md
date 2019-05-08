@@ -478,3 +478,30 @@ WHERE Column = IIF(@Variable IS NULL ,@Variable, Column)
 WHERE (@Variable IS NULL OR Column LIKE '%' + @Variable + '%' )
 
 ```
+
+### INSERT COMMA SEPARATED STRING TO A TABLE
+```sql
+
+DECLARE @String = '1, 4, 3'
+DECLARE @Tbl TABLE(ID INT);
+
+INSERT INTO @Tbl
+(
+    ID
+)
+(SELECT value  
+FROM STRING_SPLIT(@String, ',')  
+WHERE RTRIM(value) <> '');
+
+```
+
+### UPDATE WITH JOIN
+```sql
+
+UPDATE T1
+SET T1.ID = 1
+FROM Table1 T1
+    INNER JOIN Table2
+        ON T1.ID = T2.ID
+
+```

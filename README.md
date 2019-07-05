@@ -534,3 +534,32 @@ INNER JOIN
 WHERE 
    OBJECT_NAME (f.referenced_object_id) = 'Table_Name'
 ```
+
+### Parse a JSON file into a table
+```sql
+-- JSON Data sample: 
+-- {
+-- "label": "test ",
+-- "value": 1
+-- },
+-- {
+-- "label": "test2 ",
+-- "value": 2
+-- }
+
+DECLARE @tbl TABLE (id INT, label VARCHAR(500));
+
+DECLARE @json VARCHAR(max);
+
+SELECT @json = BulkColumn
+ FROM OPENROWSET (BULK 'C:\jsonFile.json', SINGLE_CLOB) as j
+
+
+ INSERT INTO @tbl (id, label)
+ SELECT [value], label
+ FROM OPENJSON(@json)
+ WITH ([value] int,
+       label nvarchar(max))
+
+SELECT * FROM @tbl
+```

@@ -518,7 +518,7 @@ SET IDENTITY_INSERT YourTable OFF
 ```
 
 
-### Find FK constraint references of a table
+### Find Foreign Key constraint references of a table
 ```sql
 SELECT 
    OBJECT_NAME(f.parent_object_id) TableName,

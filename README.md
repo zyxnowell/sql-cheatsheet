@@ -563,3 +563,10 @@ SELECT @json = BulkColumn
 
 SELECT * FROM @tbl
 ```
+
+### Add FK to existing column
+```sql
+ALTER TABLE [Table1]
+ADD CONSTRAINT FK_Table2_Id FOREIGN KEY (Table1_Id)
+    REFERENCES Table2(Table2_Id);
+```

@@ -506,6 +506,15 @@ FROM Table1 T1
 
 ```
 
+### DELETE WITH JOIN
+```sql
+DELETE A
+FROM Table1 A
+INNER JOIN Table2 B
+  ON B.Id = A.Id
+WHERE A.Column = 1 AND B.Column = 2
+```
+
 ### UPDATE/INSERT IDENTITY COLUMN
 ```sql
 

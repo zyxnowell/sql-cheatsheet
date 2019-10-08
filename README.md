@@ -446,7 +446,6 @@ BEGIN TRY
     -- Do something here
 
     COMMIT TRANSACTION
-    SELECT 1 As Success 
 END TRY
 BEGIN CATCH
     DECLARE 
@@ -464,7 +463,6 @@ BEGIN CATCH
         );
         
     ROLLBACK TRANSACTION
-    SELECT 0 As Success 
 END CATCH
 
 ```

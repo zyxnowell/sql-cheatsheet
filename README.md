@@ -577,3 +577,12 @@ ALTER TABLE [Table1]
 ADD CONSTRAINT FK_Table2_Id FOREIGN KEY (Table1_Id)
     REFERENCES Table2(Table2_Id);
 ```
+
+### List all user defined functions by type
+```sql
+SELECT [Name], [Definition], [Type_desc] 
+  FROM sys.sql_modules m 
+INNER JOIN sys.objects o 
+        ON m.object_id=o.object_id
+WHERE [Type_desc] like '%function%'
+```

@@ -586,3 +586,10 @@ INNER JOIN sys.objects o
         ON m.object_id=o.object_id
 WHERE [Type_desc] like '%function%'
 ```
+
+### UPDATE and REPLACE part of a string
+```sql
+UPDATE dbo.[Table]
+SET Value = REPLACE(Value, '123\', '')
+WHERE ID <=4
+```

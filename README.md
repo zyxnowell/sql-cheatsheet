@@ -607,3 +607,11 @@ SET @Upper = 999 ---- The highest random number
 SELECT @Random = ROUND(((@Upper - @Lower -1) * RAND() + @Lower), 0)
 SELECT @Random
 ```
+
+### Generate random DATES between two range
+```sql
+DECLARE @FromDate DATE = '2019-09-01';
+DECLARE @ToDate DATE = '2019-12-31';
+
+SELECT DATEADD(DAY,RAND(CHECKSUM(NEWID()()))*(1+DATEDIFF(DAT, @FromDate, @ToDate)),@FromDate)
+```

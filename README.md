@@ -593,3 +593,17 @@ UPDATE dbo.[Table]
 SET Value = REPLACE(Value, '123\', '')
 WHERE ID <=4
 ```
+
+### Generate random INT number
+```sql
+---- Create the variables for the random number generation
+DECLARE @Random INT;
+DECLARE @Upper INT;
+DECLARE @Lower INT
+ 
+---- This will create a random number between 1 and 999
+SET @Lower = 1 ---- The lowest random number
+SET @Upper = 999 ---- The highest random number
+SELECT @Random = ROUND(((@Upper - @Lower -1) * RAND() + @Lower), 0)
+SELECT @Random
+```

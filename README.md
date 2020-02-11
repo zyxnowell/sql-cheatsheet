@@ -615,3 +615,8 @@ DECLARE @ToDate DATE = '2019-12-31';
 
 SELECT DATEADD(DAY, RAND(CHECKSUM(NEWID()))*(1+DATEDIFF(DAY, @FromDate, @ToDate)), @FromDate)
 ```
+
+### Get list of all tables in a database
+```sql
+SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE'
+```

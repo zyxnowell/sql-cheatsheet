@@ -496,11 +496,11 @@ WHERE RTRIM(value) <> '');
 ### UPDATE WITH JOIN
 ```sql
 
-UPDATE T1
-SET T1.ID = 1
-FROM Table1 T1
-    INNER JOIN Table2
-        ON T1.ID = T2.ID
+UPDATE Table1
+SET Table1.Column = B.Column
+FROM Table1 A
+    INNER JOIN Table2 B
+        ON A.ID = B.ID
 
 ```
 

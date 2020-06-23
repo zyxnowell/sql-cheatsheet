@@ -303,7 +303,7 @@ BEGIN
 	FROM @Result
   ORDER BY
       CASE WHEN @SortingMode = 'DateAsc' THEN SampleDateColumn END ASC, 
-      CASE WHEN @SortingMode = 'DateDesc' THEN SampleDateColumn END DESC, 
+      CASE WHEN @SortingMode = 'DateDesc' THEN SampleDateColumn END DESC
   OFFSET ((@PageNumber - 1) * COALESCE(@PageSize, @PageCount)) ROWS
       FETCH NEXT COALESCE(@PageSize, @PageCount) ROWS ONLY
 END;

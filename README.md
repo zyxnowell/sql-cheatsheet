@@ -274,7 +274,9 @@ GO
 *******************************************************************************/
 -- exec [SP_Template_Get] 1
 CREATE PROCEDURE [dbo].[SP_Template_Get]
-	@Parameter INT
+	@Parameter INT,
+  @PageNumber INT = 1,
+  @PageSize INT = 20,
 AS
 BEGIN
     DECLARE @Result TABLE
@@ -298,7 +300,12 @@ BEGIN
 	SELECT 
         column,
         column2
-	FROM @Result;
+	FROM @Result
+  ORDER BY
+      CASE WHEN @SortingMode = 'DateAsc' THEN SampleDateColumn END ASC, 
+      CASE WHEN @SortingMode = 'DateDesc' THEN SampleDateColumn END DESC, 
+  OFFSET ((@PageNumber - 1) * COALESCE(@PageSize, @PageCount)) ROWS
+      FETCH NEXT COALESCE(@PageSize, @PageCount) ROWS ONLY
 END;
 
 GO

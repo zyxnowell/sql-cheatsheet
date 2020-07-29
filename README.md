@@ -635,3 +635,8 @@ BEGIN
   -- exists
 END
 ```
+
+### Generate 6 unique digit number  
+```sql
+SELECT LEFT(CAST(RAND()*1000000000+999999 AS INT),6) AS OTP
+```

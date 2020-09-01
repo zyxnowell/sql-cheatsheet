@@ -649,6 +649,7 @@ WHERE TABLE_NAME LIKE '%%'
 
 ### Search between two dates
 ```sql
+--convert to date to ignore time
 SELECT * FROM Table T
-WHERE T.DateColumn BETWEEN COALESCE(@DateFrom, T.DateColumn) AND COALESCE(@DateTo, T.DateColumn)
+WHERE CONVERT(DATE,T.DateColumn) BETWEEN COALESCE(CONVERT(DATE,@DateFrom), CONVERT(DATE,T.DateColumn)) AND COALESCE(CONVERT(DATE,@DateTo), CONVERT(DATE,T.DateColumn))
 ```

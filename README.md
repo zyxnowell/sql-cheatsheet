@@ -647,4 +647,8 @@ SELECT * FROM INFORMATION_SCHEMA.TABLES
 WHERE TABLE_NAME LIKE '%%'
 ```
 
-
+### Search between two dates
+```sql
+SELECT * FROM Table T
+WHERE T.DateColumn BETWEEN COALESCE(@DateFrom, T.DateColumn) AND COALESCE(@DateTo, T.DateColumn)
+```

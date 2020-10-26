@@ -653,3 +653,30 @@ WHERE TABLE_NAME LIKE '%%'
 SELECT * FROM Table T
 WHERE CONVERT(DATE,T.DateColumn) BETWEEN COALESCE(CONVERT(DATE,@DateFrom), CONVERT(DATE,T.DateColumn)) AND COALESCE(CONVERT(DATE,@DateTo), CONVERT(DATE,T.DateColumn))
 ```
+
+### Dates format
+```sql
+--Output: 21/03/2018
+SELECT FORMAT (getdate(), 'dd/MM/yyyy ') as date
+
+--Output: 21/03/2018, 11:36:14
+SELECT FORMAT (getdate(), 'dd/MM/yyyy, hh:mm:ss ') as date
+
+--Output: Wednesday, March, 2018
+SELECT FORMAT (getdate(), 'dddd, MMMM, yyyy') as date
+
+--Output: Mar 21 2018
+SELECT FORMAT (getdate(), 'MMM dd yyyy') as date
+
+--Output: 03.21.18
+SELECT FORMAT (getdate(), 'MM.dd.yy') as date
+
+--Output: 03-21-18
+SELECT FORMAT (getdate(), 'MM-dd-yy') as date
+
+--Output: 11:36:14 AM
+SELECT FORMAT (getdate(), 'hh:mm:ss tt') as date
+
+--Output: 03/21/2018
+SELECT FORMAT (getdate(), 'd','us') as date
+```

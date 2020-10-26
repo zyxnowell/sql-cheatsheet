@@ -1,19 +1,22 @@
 # sql-cheatsheet
+
 Personal cheat sheet for querying relational database in SQL SERVER
 
 ### Basic SELECT Statement
+
 ```sql
-SELECT select_list 
+SELECT select_list
 [ FROM table_source ]
-[ WHERE search_condition ] 
-[ GROUP BY group_by_expression ] 
-[ HAVING search_condition ] 
-[ ORDER BY order_expression [ ASC | DESC ] ] 
+[ WHERE search_condition ]
+[ GROUP BY group_by_expression ]
+[ HAVING search_condition ]
+[ ORDER BY order_expression [ ASC | DESC ] ]
 ```
 
 ### WHERE Conditions
+
 ```sql
--- AND 
+-- AND
 SELECT column_name FROM table_name
 WHERE condition1 AND condition2
 ```
@@ -49,26 +52,32 @@ WHERE NOT condition
 ```
 
 ### CASE Statement
+
 ```sql
 CASE
-    WHEN condition THEN 'true' 
+    WHEN condition THEN 'true'
     ELSE 'false'
 END
 ```
 
 ### INSERT INTO Table
+
 ###### Specify columns
+
 ```sql
 INSERT INTO table_name (column, column)
 VALUES (value, value)
 ```
+
 ###### Insert to all columns
+
 ```sql
 INSERT INTO table_name
 VALUES (value, value)
 ```
 
 ### UPDATE Table
+
 ```sql
 UPDATE table_name
     SET column = value,
@@ -78,17 +87,21 @@ WHERE condition;
 ```
 
 ### DELETE Table
+
 ```sql
 DELETE FROM table_name WHERE condition;
 ```
 
 ### TRUNCATE Table
+
 ```sql
 TRUNCATE TABLE table_name;
 ```
 
 ### Basic Functions
+
 ###### SELECT TOP
+
 ```sql
 SELECT TOP [ number | percent ] column_name
 FROM table_name
@@ -96,7 +109,9 @@ WHERE condition;
 ```
 
 ###### MIN/MAX
-*Returns the smallest/biggest value in selected column*
+
+_Returns the smallest/biggest value in selected column_
+
 ```sql
 SELECT [ MIN | MAX ] (column_name)
 FROM table_name
@@ -104,6 +119,7 @@ WHERE condition;
 ```
 
 ###### COUNT/AVG/SUM
+
 ```sql
 SELECT [ COUNT | AVG | SUM] (column_name)
 FROM table_name
@@ -111,6 +127,7 @@ WHERE condition;
 ```
 
 ### LIKE Syntax
+
 ```sql
 SELECT column
 FROM table_name
@@ -118,32 +135,35 @@ WHERE column LIKE pattern;
 ```
 
 ###### pattern operator
+
 ```sql
 WHERE column LIKE 'a%'	--Finds any values that start with "a"
 ```
 
-```sql 
+```sql
 WHERE column LIKE '%a' --Finds any values that end with "a"
-```	
+```
 
-```sql 
+```sql
 WHERE column LIKE '%or%' --Finds any values that have "or" in any position
-```	
+```
 
-```sql 
+```sql
 WHERE column LIKE '_r%' --Finds any values that have "r" in the second position
-```	
+```
 
-```sql 
+```sql
 WHERE column LIKE 'a_%_%' --Finds any values that start with "a" and are at least 3 characters in length
-```	
+```
 
-```sql 
+```sql
 WHERE column LIKE 'a%o' --Finds any values that start with "a" and ends with "o"
-```	
+```
 
-### STUFF 
+### STUFF
+
 ###### The STUFF() function deletes a part of a string and then inserts another part into the string, starting at a specified position
+
 ```sql
 -- Syntax
 STUFF (character_expression, start, length, new_string )
@@ -154,7 +174,8 @@ FROM Products
 -- OUTPUT: 20 becomes 2000
 ```
 
-### REPLACE 
+### REPLACE
+
 ```sql
 -- Syntax
 REPLACE(string, old_string, new_string)
@@ -164,15 +185,18 @@ SELECT REPLACE('AB AB', 'A','C')
 ```
 
 ### COALESCE
+
 ###### Returns the first non-null value in a list:
+
 ```sql
 SELECT COALESCE(NULL, NULL, NULL, 'JigJun', NULL, 1);
 -- OUTPUT: 'JigJun'
 ```
 
-
 ### JOINS
+
 ###### Different types of JOINS
+
 - (INNER) JOIN: Returns records that have matching values in both tables
 - LEFT (OUTER) JOIN: Return all records from the left table, and the matched records from the right table
 - RIGHT (OUTER) JOIN: Return all records from the right table, and the matched records from the left table
@@ -181,14 +205,14 @@ SELECT COALESCE(NULL, NULL, NULL, 'JigJun', NULL, 1);
 ```sql
 SELECT column_name(s)
 FROM table A
-JOIN table B 
+JOIN table B
     ON A.column_name = B.column_name;
 ```
-
 
 ### SQL Statements
 
 ###### CREATE Table
+
 ```sql
 CREATE TABLE table_name (
     column int IDENTITY(1,1) PRIMARY KEY, -- primary key and "IDENTITY(1,1)" for auto increment
@@ -217,8 +241,8 @@ ALTER TABLE table_name
 ALTER COLUMN column_name datatype;
 ```
 
-
 ###### CHECK Constraint
+
 ```sql
 -- The CHECK constraint is used to limit the value range that can be placed in a column
 CREATE TABLE table_name (
@@ -226,9 +250,10 @@ CREATE TABLE table_name (
     [Percentage] DECIMAL(5,4),
     CHECK ([Percentage] <= 1.0000)
 );
-``` 
+```
 
 ###### DEFAULT Constraint
+
 ```sql
 -- DEFAULT constraint is used to provide a default value for a column
 CREATE TABLE table_name (
@@ -239,6 +264,7 @@ CREATE TABLE table_name (
 ```
 
 ###### IF ELSE Statement
+
 ```sql
 IF (@variable = 1)
 BEGIN
@@ -251,6 +277,7 @@ END
 ```
 
 ### Declare Temporary Table
+
 ```sql
 DECLARE @Temp TABLE
     (
@@ -260,17 +287,18 @@ DECLARE @Temp TABLE
 ```
 
 ### Stored Procedure Template (GET)
+
 ```sql
 SET QUOTED_IDENTIFIER ON
 SET ANSI_NULLS ON
 GO
 
-/******************************************************************************   
-** Change History  
-**  
-** CID    Date				Author			Description   
-** -----  ---------- ---------- -----------------------------------------------  
-** CH001  08/10/2019		N.Sun		    Initial Version 
+/******************************************************************************
+** Change History
+**
+** CID    Date				Author			Description
+** -----  ---------- ---------- -----------------------------------------------
+** CH001  08/10/2019		N.Sun		    Initial Version
 *******************************************************************************/
 -- exec [SP_Template_Get] 1
 CREATE PROCEDURE [dbo].[SP_Template_Get]
@@ -292,17 +320,17 @@ BEGIN
 	)
 	SELECT column,
 		   @column2
-	FROM dbo.table_name A 
-	INNER JOIN dbo.table_name B 
+	FROM dbo.table_name A
+	INNER JOIN dbo.table_name B
         ON A.column = B.column
 	WHERE A.column = @Parameter
-  
-	SELECT 
+
+	SELECT
         column,
         column2
 	FROM @Result
   ORDER BY
-      CASE WHEN @SortingMode = 'DateAsc' THEN SampleDateColumn END ASC, 
+      CASE WHEN @SortingMode = 'DateAsc' THEN SampleDateColumn END ASC,
       CASE WHEN @SortingMode = 'DateDesc' THEN SampleDateColumn END DESC
   OFFSET ((@PageNumber - 1) * COALESCE(@PageSize, @PageCount)) ROWS
       FETCH NEXT COALESCE(@PageSize, @PageCount) ROWS ONLY
@@ -312,17 +340,18 @@ GO
 ```
 
 ### Stored Procedure Template (SET)
+
 ```sql
 SET QUOTED_IDENTIFIER ON
 SET ANSI_NULLS ON
 GO
 
-/******************************************************************************   
-** Change History  
-**  
-** CID    Date				Author			Description   
-** -----  ---------- ---------- -----------------------------------------------  
-** CH001  08/10/2019		N.Sun		    Initial Version 
+/******************************************************************************
+** Change History
+**
+** CID    Date				Author			Description
+** -----  ---------- ---------- -----------------------------------------------
+** CH001  08/10/2019		N.Sun		    Initial Version
 *******************************************************************************/
 -- exec [SP_Template_Set] 1
 CREATE PROCEDURE [dbo].[SP_Template_Set]
@@ -330,48 +359,50 @@ CREATE PROCEDURE [dbo].[SP_Template_Set]
 AS
 BEGIN
      BEGIN TRY
-        BEGIN TRANSACTION        
-        
+        BEGIN TRANSACTION
+
         -- Do something here
 
         COMMIT TRANSACTION
-        SELECT 1 As Success 
+        SELECT 1 As Success
     END TRY
     BEGIN CATCH
 
         ROLLBACK TRANSACTION
-        SELECT 0 As Success 
+        SELECT 0 As Success
     END CATCH
 END;
 
 GO
 ```
 
-### Common Table Expression (CTE) 
+### Common Table Expression (CTE)
+
 ```sql
--- Specifies a temporary named result set, known as a common table expression (CTE). 
+-- Specifies a temporary named result set, known as a common table expression (CTE).
 -- This is derived from a simple query and defined within the execution scope of a single SELECT, INSERT, UPDATE, or DELETE statement.
 
 
 -- Defining the column list is optional
-WITH CTE_Name (column1, column2)  
-AS  
--- Define the CTE query.  
-(  
-    SELECT column1, column2  
-    FROM Table1 
+WITH CTE_Name (column1, column2)
+AS
+-- Define the CTE query.
+(
+    SELECT column1, column2
+    FROM Table1
     WHERE column1 IS NOT NULL
-)  
--- Define the outer query referencing the CTE name.  
+)
+-- Define the outer query referencing the CTE name.
 SELECT *
-FROM CTE_Name  
-GROUP BY column1, column2  
-ORDER BY column1, column2;  
-GO  
+FROM CTE_Name
+GROUP BY column1, column2
+ORDER BY column1, column2;
+GO
 
 ```
 
 ### Finding text in SP
+
 ```sql
 SET QUOTED_IDENTIFIER ON
 SET ANSI_NULLS ON
@@ -402,8 +433,8 @@ AS
 GO
 ```
 
-
 ### OFFSET FETCH Clause
+
 ```sql
 -- Skip first 10 rows from the sorted result set and return the remaining rows.
 SELECT column1, column2 FROM table_name ORDER BY column1 OFFSET 10 ROWS;
@@ -414,18 +445,20 @@ SELECT column1, column2 FROM table_name ORDER BY column1 OFFSET 10 ROWS;
 SELECT column1, column2 FROM table_name ORDER BY column1 OFFSET 10 ROWS FETCH NEXT 5 ROWS ONLY;
 ```
 
-
 ### Renaming a Table
+
 ```sql
 exec sp_rename '[schema.old_table_name]', 'new_table_name'
 ```
 
 ### Renaming a Column
+
 ```sql
 exec sp_rename 'table_name.[oldColumName]' , 'newColumName', 'COLUMN'
 ```
 
-### SCOPE_IDENTITY 
+### SCOPE_IDENTITY
+
 ```sql
 -- returns the last IDENTITY value inserted into an IDENTITY column in the same scope
 -- returns the last identity value generated for any table in the current session and the current scope
@@ -436,6 +469,7 @@ SELECT SCOPE_IDENTITY()
 ```
 
 ### FIND WHICH TABLE A CONSTRAINT BELONGS TO
+
 ```sql
 SELECT
    OBJECT_NAME(o.parent_object_id)
@@ -443,38 +477,40 @@ FROM
    sys.objects o
 WHERE
    o.name = 'MyConstraintName' AND o.parent_object_id <> 0
-``` 
+```
 
 ### TRY-CATCH STATEMENT
+
 ```sql
 BEGIN TRY
-    BEGIN TRANSACTION        
-    
+    BEGIN TRANSACTION
+
     -- Do something here
 
     COMMIT TRANSACTION
 END TRY
 BEGIN CATCH
-    DECLARE 
+    DECLARE
         @ErrorMessage NVARCHAR(4000),
         @ErrorSeverity INT,
         @ErrorState INT;
-    SELECT 
+    SELECT
         @ErrorMessage = ERROR_MESSAGE(),
         @ErrorSeverity = ERROR_SEVERITY(),
         @ErrorState = ERROR_STATE();
     RAISERROR (
         @ErrorMessage,
         @ErrorSeverity,
-        @ErrorState    
+        @ErrorState
         );
-        
+
     ROLLBACK TRANSACTION
 END CATCH
 
 ```
 
 ### OPTIONAL CONDITION VARIABLES IN WHERE CLAUSE
+
 ```sql
 -- using '=' operator
 WHERE Column = IIF(@Variable IS NULL ,@Variable, Column)
@@ -485,6 +521,7 @@ WHERE (@Variable IS NULL OR Column LIKE '%' + @Variable + '%' )
 ```
 
 ### INSERT COMMA SEPARATED STRING TO A TABLE
+
 ```sql
 
 DECLARE @String = '1, 4, 3'
@@ -494,13 +531,14 @@ INSERT INTO @Tbl
 (
     ID
 )
-(SELECT value  
-FROM STRING_SPLIT(@String, ',')  
+(SELECT value
+FROM STRING_SPLIT(@String, ',')
 WHERE RTRIM(value) <> '');
 
 ```
 
 ### UPDATE WITH JOIN
+
 ```sql
 
 UPDATE Table1
@@ -512,6 +550,7 @@ FROM Table1 A
 ```
 
 ### DELETE WITH JOIN
+
 ```sql
 DELETE A
 FROM Table1 A
@@ -521,6 +560,7 @@ WHERE A.Column = 1 AND B.Column = 2
 ```
 
 ### UPDATE/INSERT IDENTITY COLUMN
+
 ```sql
 
 SET IDENTITY_INSERT YourTable ON
@@ -531,27 +571,28 @@ SET IDENTITY_INSERT YourTable OFF
 
 ```
 
-
 ### Find Foreign Key constraint references of a table
+
 ```sql
-SELECT 
+SELECT
    OBJECT_NAME(f.parent_object_id) TableName,
    COL_NAME(fc.parent_object_id,fc.parent_column_id) ColName
-FROM 
+FROM
    sys.foreign_keys AS f
-INNER JOIN 
-   sys.foreign_key_columns AS fc 
+INNER JOIN
+   sys.foreign_key_columns AS fc
       ON f.OBJECT_ID = fc.constraint_object_id
-INNER JOIN 
-   sys.tables t 
+INNER JOIN
+   sys.tables t
       ON t.OBJECT_ID = fc.referenced_object_id
-WHERE 
+WHERE
    OBJECT_NAME (f.referenced_object_id) = 'Table_Name'
 ```
 
 ### Parse a JSON file into a table
+
 ```sql
--- JSON Data sample: 
+-- JSON Data sample:
 -- {
 -- "label": "test ",
 -- "value": 1
@@ -579,6 +620,7 @@ SELECT * FROM @tbl
 ```
 
 ### Add FK to existing column
+
 ```sql
 ALTER TABLE [Table1]
 ADD CONSTRAINT FK_Table2_Id FOREIGN KEY (Table1_Id)
@@ -586,15 +628,17 @@ ADD CONSTRAINT FK_Table2_Id FOREIGN KEY (Table1_Id)
 ```
 
 ### List all user defined functions by type
+
 ```sql
-SELECT [Name], [Definition], [Type_desc] 
-  FROM sys.sql_modules m 
-INNER JOIN sys.objects o 
+SELECT [Name], [Definition], [Type_desc]
+  FROM sys.sql_modules m
+INNER JOIN sys.objects o
         ON m.object_id=o.object_id
 WHERE [Type_desc] like '%function%'
 ```
 
 ### UPDATE and REPLACE part of a string
+
 ```sql
 UPDATE dbo.[Table]
 SET Value = REPLACE(Value, '123\', '')
@@ -602,12 +646,13 @@ WHERE ID <=4
 ```
 
 ### Generate random INT number
+
 ```sql
 ---- Create the variables for the random number generation
 DECLARE @Random INT;
 DECLARE @Upper INT;
 DECLARE @Lower INT
- 
+
 ---- This will create a random number between 1 and 999
 SET @Lower = 1 ---- The lowest random number
 SET @Upper = 999 ---- The highest random number
@@ -616,6 +661,7 @@ SELECT @Random
 ```
 
 ### Generate random DATES between two range
+
 ```sql
 DECLARE @FromDate DATE = '2019-09-01';
 DECLARE @ToDate DATE = '2019-12-31';
@@ -624,11 +670,13 @@ SELECT DATEADD(DAY, RAND(CHECKSUM(NEWID()))*(1+DATEDIFF(DAY, @FromDate, @ToDate)
 ```
 
 ### Get list of all tables in a database
+
 ```sql
 SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE'
 ```
 
 ### Check if a table exists in a database
+
 ```sql
 IF EXISTS(SELECT *  FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'dbo' AND TABLE_NAME = 'Table')
 BEGIN
@@ -636,18 +684,21 @@ BEGIN
 END
 ```
 
-### Generate 6 unique digit number  
+### Generate 6 unique digit number
+
 ```sql
 SELECT LEFT(CAST(RAND()*1000000000+999999 AS INT),6) AS OTP
 ```
 
-### Search table name 
+### Search table name
+
 ```sql
-SELECT * FROM INFORMATION_SCHEMA.TABLES 
+SELECT * FROM INFORMATION_SCHEMA.TABLES
 WHERE TABLE_NAME LIKE '%%'
 ```
 
 ### Search between two dates
+
 ```sql
 --convert to date to ignore time
 SELECT * FROM Table T
@@ -655,6 +706,7 @@ WHERE CONVERT(DATE,T.DateColumn) BETWEEN COALESCE(CONVERT(DATE,@DateFrom), CONVE
 ```
 
 ### Dates format
+
 ```sql
 --Output: 21/03/2018
 SELECT FORMAT (getdate(), 'dd/MM/yyyy ') as date
@@ -679,4 +731,19 @@ SELECT FORMAT (getdate(), 'hh:mm:ss tt') as date
 
 --Output: 03/21/2018
 SELECT FORMAT (getdate(), 'd','us') as date
+```
+
+### Triggers
+
+```sql
+create trigger t1 on table1
+after insert
+as
+begin
+    insert into Audit
+    (Column)
+    select 'Insert New Row with Key' + cast(t.Id as nvarchar(10)) + 'in table1'
+    from table1 t where Id IN (select Id from inserted)
+end
+go
 ```

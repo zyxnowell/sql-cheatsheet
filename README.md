@@ -770,7 +770,7 @@ WHERE TABLE_NAME LIKE 'PREFIX_%'
 ```
 
 ### Generate script to alter tables to remove all constraints
-## (uncomment EXEC to execute script, PRINT is for reference only)
+#### (uncomment EXEC to execute script, PRINT is for reference only)
 
 ```sql
 

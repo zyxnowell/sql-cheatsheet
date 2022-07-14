@@ -759,3 +759,30 @@ WHERE       c.name LIKE '%COLUMN_NAME%'
 ORDER BY    TableName
             ,ColumnName;
 ```
+
+
+### Script to generate drop all tables with prefix
+
+```sql
+SELECT 'DROP TABLE ' + TABLE_NAME + '' 
+FROM INFORMATION_SCHEMA.TABLES 
+WHERE TABLE_NAME LIKE 'PREFIX_%'
+```
+
+### Generate script to alter tables to remove all constraints
+## (uncomment EXEC to execute script, PRINT is for reference only)
+
+```sql
+
+DECLARE @SQL varchar(4000)=''
+SELECT @SQL = 
+@SQL + 'ALTER TABLE ' + s.name+'.'+t.name + ' DROP CONSTRAINT [' + RTRIM(f.name) +'];' + CHAR(13)
+FROM sys.Tables t
+INNER JOIN sys.foreign_keys f ON f.parent_object_id = t.object_id
+INNER JOIN sys.schemas     s ON s.schema_id = f.schema_id
+WHERE t.name LIKE 'PREFIX_%'
+
+--EXEC (@SQL)
+
+PRINT @SQL
+```

@@ -817,6 +817,7 @@ WHILE @@FETCH_STATUS = 0
     BEGIN
         -- use current product_name and list_price from current index of the cursor in the loop
         PRINT @product_name + CAST(@list_price AS varchar);
+        -- fetch next row from the cursor
         FETCH NEXT FROM cursor_product INTO 
             @product_name, 
             @list_price;

@@ -786,3 +786,47 @@ WHERE t.name LIKE 'PREFIX_%'
 
 PRINT @SQL
 ```
+
+### Cursor Sample
+#### Loop through a set of data
+
+```sql
+-- two variables to hold product name and list price (gonna be used on the loop)
+DECLARE 
+    @product_name VARCHAR(MAX), 
+    @list_price   DECIMAL; 
+
+--defines the result set for the cursor
+DECLARE cursor_product CURSOR 
+FOR SELECT 
+        product_name, 
+        list_price
+    FROM 
+        dbo.products; 
+
+-- open cursor
+OPEN cursor_product;
+
+--fetch a row from the cursor into one or more variables
+FETCH NEXT FROM cursor_product INTO 
+    @product_name, 
+    @list_price;
+
+-- loop through the cursor
+WHILE @@FETCH_STATUS = 0
+    BEGIN
+        -- use current product_name and list_price from current index of the cursor in the loop
+        PRINT @product_name + CAST(@list_price AS varchar);
+        FETCH NEXT FROM cursor_product INTO 
+            @product_name, 
+            @list_price;
+    END;
+
+-- close cursor
+CLOSE cursor_product;
+
+-- deallocate the cursor to release it
+DEALLOCATE cursor_product;
+
+
+```
